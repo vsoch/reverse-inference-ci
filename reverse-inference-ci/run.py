@@ -10,12 +10,15 @@ import pandas
 import numpy
 import os
 
+print "Reverse Inference!"
+
 base = "./reverse-inference-ci"
 data = "%s/data" %(base)
 mr = "%s/data/mr" %(base)
 output = "%s/output" %(base)
 groups = glob("%s/groups/*.pkl" %(data))
-input_images = glob("%s/input/*.nii.gz")
+input_images = glob("%s/input/*.nii.gz" %base)
+print "Found %s input images." %(len(input_images))
 
 results = pandas.DataFrame(columns=["image_id","concept","concept_id","reverse_inference_score"])
 standard = nibabel.load("%s/MNI152.nii.gz" %mr)

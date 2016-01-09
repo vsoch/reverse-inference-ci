@@ -17,6 +17,7 @@ base = "./reverse-inference-ci"
 data = "%s/data" %(base)
 mr = "%s/data/mr" %(base)
 output = "%s/output" %(base)
+templates = "%s/template" %(base)
 groups = glob("%s/groups/*.pkl" %(data))
 input_images = glob("%s/input/*.nii.gz" %base)
 print "Found %s input images." %(len(input_images))
@@ -76,7 +77,7 @@ for row in results.iterrows():
 table = "%s</tbody></table>\n" %(table)
 
 # Write the new table
-table_template = "".join(open("template/table.html","rb").readlines())
+table_template = "".join(open("%s/table.html" %templates,"rb").readlines())
 table_template = table_template.replace("[[SUB_TABLE_SUB]]",table)
 filey = open("index.html","wb")
 filey.writelines(table_template)

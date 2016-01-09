@@ -39,6 +39,7 @@ for input_image in input_images:
     for node in groups:
         group = pickle.load(open(node,"rb"))
 
+        print "Calculating against concept %s..." %(group["name"])
         # Remove image from the in and out groups
         in_group = ["%s/%s" %(mr,x) for x in group["in"]]
         out_group = ["%s/%s" %(mr,x) for x in group["out"]]
@@ -57,4 +58,5 @@ for input_image in input_images:
         ri = calculate_reverse_inference_distance(nii,in_group,out_group,standard_mask)
         results.loc["%s_%s" %(image_name,group["nid"])] = [image_name,group["name"],group["nid"],ri]
 
+print "Saving result to /home/ubuntu/reverse-inference-ci/index.html..."
 results.to_html("%s/index.html" %base)

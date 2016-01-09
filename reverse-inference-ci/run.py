@@ -59,4 +59,29 @@ for input_image in input_images:
         results.loc["%s_%s" %(image_name,group["nid"])] = [image_name,group["name"],group["nid"],ri]
 
 print "Saving result to /home/ubuntu/reverse-inference-ci/index.html..."
-results.to_html("%s/index.html" %base)
+
+# Prepare rendered table
+table = '<table id="fresh-table" class="table">\n<thead>\n'
+fields = results.columns.tolist()
+for field in fields:
+    table = '%s<th data-field="%s" data-sortable="true">%s</th>' %(table,field,field)
+table = '%s\n</thead>\n<tbody>\n' %(table)
+
+for row in results.iterrows():
+    table = "%s<tr>\n" %(table)
+    for field in row[1]:
+        table = "%s<td>%s</td>\n" %(table,field)
+    table = "%s</tr>\n" %(table)
+
+table = "%s</tbody></table>\n" %(table)
+
+# Write the new table
+table_template = "".join(open("template/table.html","rb").readlines())
+table_template = table_template.replace("[[SUB_TABLE_SUB]]",table)
+filey = open("index.html","wb")
+filey.writelines(table_template)
+filey.close()
+
+# Finally, save other versions of data for download
+results.to_csv("reverse-inference-ci-results.tsv",sep="\t")
+results.to_json("reverse-inference-ci-results.json")

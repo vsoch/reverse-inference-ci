@@ -1,0 +1,3 @@
+# Calculate Reverse Inference Scores for a Query Image
+
+This is a continuous integration "reproducible repo," meaning that you can submit a PR to the branch with your image of interest in the reverse-inference-ci/input folder, and a results report will be generated to show a reverse inference score for your image against all Cognitive Atlas Concepts, defined at the timepoint (and with same image sets as) this [recent work](http://www.github.com/vsoch/semantic-image-comparison). In this work, we show the value of semantic image comparison, and you can view the entire set of our images at their corresponding tagged nodes at this [web interface](http://www.vsoch.github.io/semantic-image-comparison-web).

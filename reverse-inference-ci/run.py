@@ -29,7 +29,7 @@ if not os.path.exists(output):
 
 for input_image in input_images:
 
-    image_name = os.path.split(image)[1].replace(".nii.gz","")
+    image_name = os.path.split(input_image)[1].replace(".nii.gz","")
     nii = resample_img(input_image,target_affine=standard.get_affine(),target_shape=standard.shape)
     output_file = "%s/%s.nii.gz" %(output,image_name)
     nibabel.save(nii,output_file)

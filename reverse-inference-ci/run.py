@@ -7,6 +7,7 @@ import nibabel
 from nilearn.image import resample_img
 from glob import glob
 import pandas
+import pickle
 import numpy
 import os
 
